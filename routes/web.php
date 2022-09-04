@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ConcertsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/concerts/{id}', [ConcertsContoller::class, 'show']);
+Route::get('/concerts/{concert}', [ConcertsController::class, 'show']);
 
