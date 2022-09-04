@@ -21,12 +21,24 @@ class ViewConcertListingTest extends TestCase
             'city' => 'Laraville',
             'state' => 'ON',
             'zip' => '17916',
-            'additional_information' => 'For tickets, call (555) 555-555.'
+            'additional_information' => 'for tickets, call (555) 555-555.'
         ]);
 
         //Act
+        $response = $this -> get('/concerts/'.$concert->id);
 
         //Assert
+        $response->assertSee([
+            'The Red Chord',
+            'with Animosity and Lethargy',
+            'December 13, 2016',
+            '8:00pm',
+            '32.50',
+            'The Mosh Pit',
+            '123 Example Lane',
+            'Laraville, ON 17916',
+            'for tickets, call (555) 555-555.'
+        ]);
 
     }
 }
