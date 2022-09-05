@@ -14,7 +14,7 @@ class ViewConcertListingTest extends TestCase
     /** @test */
     function user_can_view_a_concert_listing() {
         //Arrange
-        $concert = Concert::create([
+        $concert = Concert::factory()->create([
             'title' => 'The Red Chord',
             'subtitle' => 'with Animosity and Lethargy',
             'date' => Carbon::parse('December 13, 2016 8:00pm'),
