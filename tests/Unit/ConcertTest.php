@@ -11,6 +11,7 @@ use Tests\TestCase;
 
 class ConcertTest extends TestCase
 {
+    use RefreshDatabase;
 
     /** @test */
     function can_get_formatted_date() {

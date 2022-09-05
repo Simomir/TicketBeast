@@ -31,4 +31,12 @@ class ConcertFactory extends Factory
             'additional_information' => $this->faker->text(150)
         ];
     }
+
+    public function publish() {
+        return $this->state(function ($attributes) {
+            return [
+                'published_at' => Carbon::parse('-1 week')
+            ];
+        });
+    }
 }
