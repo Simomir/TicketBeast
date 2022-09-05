@@ -12,7 +12,7 @@ class ViewConcertListingTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function user_can_view_a_concert_listing() {
+    function user_can_view_a_published_concert_listing() {
 
         $concert = Concert::factory()->create([
             'title' => 'The Red Chord',
@@ -24,7 +24,8 @@ class ViewConcertListingTest extends TestCase
             'city' => 'Laraville',
             'state' => 'ON',
             'zip' => '17916',
-            'additional_information' => 'for tickets, call (555) 555-555.'
+            'additional_information' => 'for tickets, call (555) 555-555.',
+            'published_at' => Carbon::parse('-1 week')
         ]);
 
         $response = $this -> get('/concerts/'.$concert->id);
