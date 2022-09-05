@@ -9,6 +9,8 @@ use App\Models\Concert;
 
 class ViewConcertListingTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     function user_can_view_a_concert_listing() {
         //Arrange
