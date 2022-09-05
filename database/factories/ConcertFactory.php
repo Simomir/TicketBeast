@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Concert;
 use Carbon\Carbon;
 use Faker\Provider\en_US\Address;
-use Faker\Provider\en_US\Text;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ConcertFactory extends Factory
