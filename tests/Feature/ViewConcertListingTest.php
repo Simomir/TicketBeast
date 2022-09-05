@@ -13,7 +13,7 @@ class ViewConcertListingTest extends TestCase
 
     /** @test */
     function user_can_view_a_concert_listing() {
-        //Arrange
+
         $concert = Concert::factory()->create([
             'title' => 'The Red Chord',
             'subtitle' => 'with Animosity and Lethargy',
@@ -27,10 +27,8 @@ class ViewConcertListingTest extends TestCase
             'additional_information' => 'for tickets, call (555) 555-555.'
         ]);
 
-        //Act
         $response = $this -> get('/concerts/'.$concert->id);
 
-        //Assert
         $response->assertSee([
             'The Red Chord',
             'with Animosity and Lethargy',
