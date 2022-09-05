@@ -39,4 +39,12 @@ class ConcertFactory extends Factory
             ];
         });
     }
+
+    public function unpublished() {
+        return $this->state(function ($attribute) {
+            return [
+                'published_at' => null
+            ];
+        });
+    }
 }
