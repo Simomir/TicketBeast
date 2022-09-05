@@ -15,6 +15,10 @@ class Concert extends Model
 
     protected $appends = ['formatted_date', 'formatted_start_time', 'ticket_price_in_dollars'];
 
+    public function scopePublished($query) {
+        return $query->whereNotNull('published_at');
+    }
+
     public function getFormattedDateAttribute() {
         return $this->date->format('F j, Y');
     }

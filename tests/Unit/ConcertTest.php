@@ -38,4 +38,17 @@ class ConcertTest extends TestCase
 
         $this->assertEquals('67.50', $concert->ticket_price_in_dollars);
     }
+
+    /** @test */
+    function concerts_with_a_published_at_date_are_published() {
+        $publishedConcertA = Concert::factory()->create(['published_at' => Carbon::parse('-1 week')]);
+        $publishedConcertB = Concert::factory()->create(['published_at' => Carbon::parse('-1 week')]);
+        $unPublishedConcert = Concert::factory()->create(['published_at' => null]);
+
+        $publishedConcerts = Concert::published()->get();
+
+        $this->assertTrue($publishedConcerts->contains($publishedConcertA));
+        $this->assertTrue($publishedConcerts->contains($publishedConcertB));
+        $this->assertFalse($publishedConcerts->contains($unPublishedConcert));
+    }
 }
