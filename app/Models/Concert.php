@@ -13,7 +13,7 @@ class Concert extends Model
 
     protected $dates = ['date'];
 
-    protected $appends = ['formatted_date', 'formatted_start_time'];
+    protected $appends = ['formatted_date', 'formatted_start_time', 'ticket_price_in_dollars'];
 
     public function getFormattedDateAttribute() {
         return $this->date->format('F j, Y');
@@ -21,5 +21,9 @@ class Concert extends Model
 
     public function getFormattedStartTimeAttribute() {
         return $this->date->format('g:ia');
+    }
+
+    public function getTicketPriceInDollarsAttribute(): string {
+        return number_format($this->ticket_price / 100, 2);
     }
 }
