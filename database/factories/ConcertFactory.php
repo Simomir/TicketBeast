@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Concert;
 use Carbon\Carbon;
 use Faker\Provider\en_US\Address;
+use Faker\Provider\en_US\Text;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ConcertFactory extends Factory
@@ -24,10 +25,10 @@ class ConcertFactory extends Factory
             'date' => Carbon::parse('+2 weeks'),
             'ticket_price' => $this->faker->numberBetween(1000, 6000),
             'venue' => 'The Example Theatre',
-            'venue_address' => $this->faker->streetName(),
-            'city' => $this->faker->city(),
+            'venue_address' => $this->faker->streetAddress,
+            'city' => $this->faker->city,
             'state' => Address::stateAbbr(),
-            'zip' => $this->faker->postcode(),
+            'zip' => Address::postcode(),
             'additional_information' => $this->faker->text(150)
         ];
     }

@@ -5,7 +5,9 @@ namespace Tests\Unit;
 use App\Models\Concert;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\TestCase;
+//use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+
 
 class ConcertTest extends TestCase
 {
@@ -14,7 +16,7 @@ class ConcertTest extends TestCase
     /** @test */
     function can_get_formatted_date() {
         $concert = Concert::factory()->create([
-            'date' => Carbon::parse('2016-12-01 8:00pm')
+            'date' => Carbon::parse('2016-12-01 8:00pm'),
         ]);
 
         $date = $concert->formatted_date;
