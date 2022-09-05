@@ -13,17 +13,8 @@ class ConcertTest extends TestCase
 
     /** @test */
     function can_get_formatted_date() {
-        $concert = Concert::create([
-            'title' => 'The Red Chord',
-            'subtitle' => 'with Animosity and Lethargy',
-            'date' => Carbon::parse('2016-12-01 8:00pm'),
-            'ticket_price' => 3250,
-            'venue' => 'The Mosh Pit',
-            'venue_address' => '123 Example Lane',
-            'city' => 'Laraville',
-            'state' => 'ON',
-            'zip' => '17916',
-            'additional_information' => 'for tickets, call (555) 555-555.'
+        $concert = Concert::factory()->create([
+            'date' => Carbon::parse('2016-12-01 8:00pm')
         ]);
 
         $date = $concert->formatted_date;
