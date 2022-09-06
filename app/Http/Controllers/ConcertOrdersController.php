@@ -21,7 +21,11 @@ class ConcertOrdersController extends Controller
         $token = $request->input('payment_token');
         $this->paymentGateway->charge($amount, $token);
 
-        $concert->orders()->create(['email' => $request->input('email')]);
+        $order = $concert->orders()->create(['email' => $request->input('email')]);
+
+        foreach (range(1, $ticketQuantity) as $_) {
+            $order->tickets()->create([]);
+        }
 
         return response()->json([], 201);
     }
