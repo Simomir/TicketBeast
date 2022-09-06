@@ -6,4 +6,12 @@ class FakePaymentgateway {
     {
         return 'valid-token';
     }
+
+    public function charge() {
+
+    }
+
+    public function totalCharges() {
+
+    }
 }
