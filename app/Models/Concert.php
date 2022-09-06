@@ -34,4 +34,14 @@ class Concert extends Model
     public function orders() {
         return $this->hasMany(Order::class);
     }
+
+    public function orderTickets($email, $ticketQuantity) {
+        $order = $this->orders()->create(['email' => $email]);
+
+        foreach (range(1, $ticketQuantity) as $_) {
+            $order->tickets()->create([]);
+        }
+
+        return $order;
+    }
 }
