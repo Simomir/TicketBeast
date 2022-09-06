@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConcertOrdersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConcertsController;
 
