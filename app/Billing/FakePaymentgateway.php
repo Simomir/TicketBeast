@@ -3,7 +3,7 @@ namespace App\Billing;
 
 use Illuminate\Support\Collection;
 
-class FakePaymentgateway {
+class FakePaymentgateway implements PaymentGateway {
 
     /**
      * @var Collection
