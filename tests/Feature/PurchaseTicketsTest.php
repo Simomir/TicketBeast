@@ -26,7 +26,7 @@ class PurchaseTicketsTest extends TestCase
         return $this->json('POST', "/concerts/{$concert->id}/orders", $params);
     }
 
-    private function assertValidationError($response, $field) {
+    private function assertValidationError(TestResponse $response, string $field) {
         $response->assertStatus(422);
         $this->assertArrayHasKey($field, $response->decodeResponseJson()['errors']);
     }
