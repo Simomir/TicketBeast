@@ -65,4 +65,17 @@ class PurchaseTicketsTest extends TestCase
         $response->assertStatus(422);
         $this->assertArrayHasKey('email', $response->decodeResponseJson()['errors']);
     }
+
+    /** @test */
+    function ticket_quantity_is_required_to_purchase_tickets() {
+        $concert = Concert::factory()->create();
+
+        $response = $this->json('POST', "/concerts/{$concert->id}/orders", [
+            'email' => 'john@example.com',
+            'payment_token' => $this->paymentGateway->getValidTestToken()
+        ]);
+
+        $response->assertStatus(422);
+        $this->assertArrayHasKey('ticket_quantity', $response->decodeResponseJson()['errors']);
+    }
 }
