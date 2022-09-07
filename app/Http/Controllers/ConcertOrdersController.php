@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Billing\PaymentGateway;
 use App\Models\Concert;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ConcertOrdersController extends Controller
 {
@@ -14,7 +15,15 @@ class ConcertOrdersController extends Controller
         $this->paymentGateway = $paymentGateway;
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function store(Request $request, $id) {
+
+        $this->validate($request, [
+            'email' => 'required',
+        ]);
+
         $concert = Concert::find($id);
         $this->paymentGateway->charge($request->input('ticket_quantity') * $concert->ticket_price, $request->input('payment_token'));
 
