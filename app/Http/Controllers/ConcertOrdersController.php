@@ -25,11 +25,7 @@ class ConcertOrdersController extends Controller
         ]);
 
         $concert = Concert::find($id);
-        $order = $concert->orders()->create(['email' => $request->input('email')]);
-
-        foreach (range(1, $request->input('ticket_quantity')) as $i) {
-            $order->tickets()->create([]);
-        }
+        $order = $concert->orderTickets($request->input('email'), $request->input('ticket_quantity'));
 
         $this->paymentGateway->charge($request->input('ticket_quantity') * $concert->ticket_price, $request->input('payment_token'));
 
