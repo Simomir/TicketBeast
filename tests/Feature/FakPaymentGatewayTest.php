@@ -17,4 +17,19 @@ class FakPaymentGatewayTest extends TestCase
 
         $this->assertEquals(2500, $paymentGateway->totalCharges());
     }
+
+    /** @test */
+    function charges_with_invalid_payment_token_fail() {
+
+        try {
+            $paymentGateway = new FakePaymentgateway;
+
+            $paymentGateway->charge(2500, 'invalid-payment-token');
+        } catch (PaymentFailedException $exception) {
+            return;
+        }
+
+        $this->fail();
+
+    }
 }
