@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Billing\PaymentGateway;
 use App\Models\Concert;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class ConcertOrdersController extends Controller
 {
-    private $paymentGateway;
+    private PaymentGateway $paymentGateway;
 
     public function __construct(PaymentGateway $paymentGateway) {
         $this->paymentGateway = $paymentGateway;
@@ -18,7 +19,8 @@ class ConcertOrdersController extends Controller
     /**
      * @throws ValidationException
      */
-    public function store(Request $request, $id) {
+    public function store(Request $request, $id): JsonResponse
+    {
 
         $this->validate($request, [
             'email' => ['required', 'email'],
