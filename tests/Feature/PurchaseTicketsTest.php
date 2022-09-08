@@ -53,7 +53,17 @@ class PurchaseTicketsTest extends TestCase
 
     /** @test */
     function cannot_purchase_tickets_to_an_unpublished_concert() {
+        $concert = Concert::factory()->state('unpublished')->create();
 
+        $response = $this->orderTickets($concert, [
+            'email' => 'john@example.com',
+            'ticket_quantity' => 3,
+            'payment_token' => $this->paymentGateway->getValidTestToken(),
+        ]);
+
+        $response->assertStatus(404);
+        $this->assertEquals(0, $concert->orders()->count());
+        $this->assertEquals(0, $this->paymentGateway->totalCharges());
     }
 
     /** @test */
