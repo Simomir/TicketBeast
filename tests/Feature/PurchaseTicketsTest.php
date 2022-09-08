@@ -21,12 +21,12 @@ class PurchaseTicketsTest extends TestCase
         $this->app->instance(PaymentGateway::class, $this->paymentGateway);
     }
 
-    private function orderTickets($concert, array $params): TestResponse
+    private function orderTickets($concert, array $params)
     {
         return $this->json('POST', "/concerts/{$concert->id}/orders", $params);
     }
 
-    private function assertValidationError(TestResponse $response, string $field) {
+    private function assertValidationError($response, string $field) {
         $response->assertStatus(422);
         $this->assertArrayHasKey($field, $response->decodeResponseJson()['errors']);
     }
@@ -58,7 +58,7 @@ class PurchaseTicketsTest extends TestCase
         $response = $this->orderTickets($concert, [
             'email' => 'john@example.com',
             'ticket_quantity' => 3,
-            'payment_token' => 'invalid-payment-token',
+            'payment_token' => 'asjhdashdlasdlas',
         ]);
 
         $response->assertStatus(422);

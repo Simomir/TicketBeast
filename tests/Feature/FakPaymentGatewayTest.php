@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Billing\FakePaymentgateway;
+use App\Billing\PaymentFailedException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -19,17 +20,17 @@ class FakPaymentGatewayTest extends TestCase
     }
 
     /** @test */
-    function charges_with_invalid_payment_token_fail() {
+    function charges_with_an_invalid_payment_token_fail() {
 
         try {
             $paymentGateway = new FakePaymentgateway;
 
-            $paymentGateway->charge(2500, 'invalid-payment-token');
-        } catch (PaymentFailedException $exception) {
+            $paymentGateway->charge(2500, 'dkgasdasdjlas');
+        } catch (PaymentFailedException $e) {
+            $this->assertEquals('', $e->getMessage());
             return;
         }
 
         $this->fail();
-
     }
 }
