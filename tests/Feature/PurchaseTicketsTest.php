@@ -53,7 +53,7 @@ class PurchaseTicketsTest extends TestCase
 
     /** @test */
     function cannot_purchase_tickets_to_an_unpublished_concert() {
-        $concert = Concert::factory()->state('unpublished')->create();
+        $concert = Concert::factory()->unpublished()->create();
 
         $response = $this->orderTickets($concert, [
             'email' => 'john@example.com',
