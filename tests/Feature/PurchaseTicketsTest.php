@@ -80,6 +80,11 @@ class PurchaseTicketsTest extends TestCase
     }
 
     /** @test */
+    function cannot_purchase_more_tickets_than_remain() {
+
+    }
+
+    /** @test */
     function email_is_required_to_purchase_tickets() {
 
         $concert = Concert::factory()->publish()->create();
