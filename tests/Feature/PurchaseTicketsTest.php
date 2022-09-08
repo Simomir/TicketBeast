@@ -52,6 +52,11 @@ class PurchaseTicketsTest extends TestCase
     }
 
     /** @test */
+    function cannot_purchase_tickets_to_an_unpublished_concert() {
+
+    }
+
+    /** @test */
     function an_order_is_not_created_if_payment_fails() {
         $concert = Concert::factory()->create(['ticket_price' => 3250]);
 

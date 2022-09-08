@@ -32,7 +32,7 @@ class ConcertOrdersController extends Controller
         try {
             $concert = Concert::find($id);
             $this->paymentGateway->charge($request->input('ticket_quantity') * $concert->ticket_price, $request->input('payment_token'));
-            $order = $concert->orderTickets($request->input('email'), $request->input('ticket_quantity'));
+            $concert->orderTickets($request->input('email'), $request->input('ticket_quantity'));
 
             return response()->json([], 201);
         } catch (PaymentFailedException $e) {
