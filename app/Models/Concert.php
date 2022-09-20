@@ -48,4 +48,8 @@ class Concert extends Model
     public function addTickets($quantity) {
 
     }
+
+    public function ticketsRemaining() {
+
+    }
 }
