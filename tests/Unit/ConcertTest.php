@@ -68,4 +68,9 @@ class ConcertTest extends TestCase
         $concert->addTickets(50);
         $this->assertEquals(50, $concert->ticketsRemaining());
     }
+
+    /** @test */
+    function tickets_remaining_does_not_include_tickets_associated_with_an_order() {
+
+    }
 }
