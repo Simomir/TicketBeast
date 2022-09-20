@@ -44,4 +44,8 @@ class Concert extends Model
 
         return $order;
     }
+
+    public function addTickets($quantity) {
+
+    }
 }
