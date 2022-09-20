@@ -27,7 +27,8 @@ class Concert extends Model
         return $this->date->format('g:ia');
     }
 
-    public function getTicketPriceInDollarsAttribute(): string {
+    public function getTicketPriceInDollarsAttribute(): string
+    {
         return number_format($this->ticket_price / 100, 2);
     }
 
@@ -39,7 +40,8 @@ class Concert extends Model
         return $this->hasMany(Ticket::class);
     }
 
-    public function orderTickets($email, $ticketQuantity): Order {
+    public function orderTickets($email, $ticketQuantity): Order
+    {
         $order = $this->orders()->create(['email' => $email]);
         $tickets = $this->tickets()->take($ticketQuantity)->get();
 
@@ -50,7 +52,8 @@ class Concert extends Model
         return $order;
     }
 
-    public function addTickets(int $quantity) {
+    public function addTickets(int $quantity): void
+    {
         foreach (range(1, $quantity) as $i) {
             $this->tickets()->create([]);
         }
@@ -58,6 +61,6 @@ class Concert extends Model
 
     public function ticketsRemaining(): int
     {
-        return $this->tickets()->count();
+        return $this->tickets()->whereNull('order_id')->count();
     }
 }
