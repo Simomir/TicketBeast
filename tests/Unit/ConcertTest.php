@@ -78,4 +78,9 @@ class ConcertTest extends TestCase
 
         $this->assertEquals(20, $concert->ticketsRemaining());
     }
+
+    /** @test */
+    function trying_to_purchase_more_tickets_than_remain_throws_an_exception() {
+
+    }
 }
