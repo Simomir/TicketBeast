@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Exceptions\NotEnoughTicketsException;
 use App\Models\Concert;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
