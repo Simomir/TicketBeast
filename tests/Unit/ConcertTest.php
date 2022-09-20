@@ -71,6 +71,10 @@ class ConcertTest extends TestCase
 
     /** @test */
     function tickets_remaining_does_not_include_tickets_associated_with_an_order() {
+        $concert = Concert::factory()->create();
+        $concert->addTickets(50);
+        $concert->orderTickets('jane@example.com', 30);
 
+        $this->assertEquals(20, $concert->ticketsRemaining());
     }
 }
