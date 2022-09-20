@@ -81,6 +81,18 @@ class ConcertTest extends TestCase
 
     /** @test */
     function trying_to_purchase_more_tickets_than_remain_throws_an_exception() {
+        $concert = Concert::factory()->create();
+        $concert->addTickets(10);
 
+        try {
+            $concert->orderTickets('jane@example.com', 11);
+        } catch (NotEnoughTicketsException $exception) {
+            $order = $concert->orders()->where('email', 'jane@example.com')->first();
+            $this->assertNull($order);
+            $this->assertEquals(10, $concert->ticketsRemaining());
+            return;
+        }
+
+        $this->fail('Order succeeded even though there were not enough tickets remaining');
     }
 }
