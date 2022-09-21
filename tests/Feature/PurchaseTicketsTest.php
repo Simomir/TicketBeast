@@ -32,8 +32,7 @@ class PurchaseTicketsTest extends TestCase
     /** @test */
     function customer_can_purchase_tickets_to_a_published_concert() {
 
-        $concert = Concert::factory()->publish()->create(['ticket_price' => 3250]);
-        $concert->addTickets(3);
+        $concert = Concert::factory()->publish()->create(['ticket_price' => 3250])->addTickets(3);
 
         $response = $this->orderTickets($concert, [
             'email' => 'john@example.com',
@@ -42,11 +41,13 @@ class PurchaseTicketsTest extends TestCase
         ]);
 
         $response->assertStatus(201);
-
         $this->assertEquals(9750, $this->paymentGateway->totalCharges());
 
         $order = $concert->orders()->where('email', 'john@example.com')->first();
         $this->assertNotNull($order);
+
+        $this->assertTrue($concert->hasOrderFor('john@example.com'));
+
         $this->assertEquals(3, $order->tickets()->count());
     }
 
