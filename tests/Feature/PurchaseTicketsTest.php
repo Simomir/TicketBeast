@@ -53,6 +53,7 @@ class PurchaseTicketsTest extends TestCase
     /** @test */
     function cannot_purchase_tickets_to_an_unpublished_concert() {
         $concert = Concert::factory()->unpublished()->create();
+        $concert->addTickets(5);
 
         $response = $this->orderTickets($concert, [
             'email' => 'john@example.com',
@@ -68,6 +69,7 @@ class PurchaseTicketsTest extends TestCase
     /** @test */
     function an_order_is_not_created_if_payment_fails() {
         $concert = Concert::factory()->publish()->create(['ticket_price' => 3250]);
+        $concert->addTickets(4);
 
         $response = $this->orderTickets($concert, [
             'email' => 'john@example.com',
