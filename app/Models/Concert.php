@@ -75,6 +75,11 @@ class Concert extends Model
 
     public function hasOrderFor($customerEmail): bool
     {
-        $this->orders()->where('email', $customerEmail)->count() > 0;
+       return $this->orders()->where('email', $customerEmail)->count() > 0;
+    }
+
+    public function ordersFor($customerEmail)
+    {
+        return $this->orders()->where('email', $customerEmail)->get();
     }
 }
