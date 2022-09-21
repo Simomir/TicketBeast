@@ -15,8 +15,7 @@ class OrderTest extends TestCase
     /** @test */
     function tickets_are_released_when_order_is_cancelled()
     {
-        $concert = Concert::factory()->create();
-        $concert->addTickets(10);
+        $concert = Concert::factory()->create()->addTickets(10);
         $order = $concert->orderTickets('jane@example.com', 5);
 
         // pre-condition
