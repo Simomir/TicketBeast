@@ -9,6 +9,8 @@ class Ticket extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function scopeAvailable($query) {
         return $query->whereNull('order_id');
     }
