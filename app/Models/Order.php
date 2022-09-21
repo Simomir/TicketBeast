@@ -22,5 +22,7 @@ class Order extends Model
         {
             $ticket->update(['order_id' => null]);
         }
+
+        $this->delete();
     }
 }

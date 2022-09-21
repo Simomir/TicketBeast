@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\Concert;
+use App\Models\Order;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -24,7 +25,6 @@ class OrderTest extends TestCase
         $order->cancel();
 
         $this->assertEquals(10, $concert->ticketsRemaining());
-
-
+        $this->assertNull(Order::find($order->id));
     }
 }
