@@ -11,7 +11,13 @@ class Order extends Model
 
     protected $guarded = [];
 
-    public function tickets() {
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function cancel()
+    {
+
     }
 }
