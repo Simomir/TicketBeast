@@ -16,15 +16,18 @@ class Concert extends Model
 
     protected $appends = ['formatted_date', 'formatted_start_time', 'ticket_price_in_dollars'];
 
-    public function scopePublished($query) {
+    public function scopePublished($query)
+    {
         return $query->whereNotNull('published_at');
     }
 
-    public function getFormattedDateAttribute() {
+    public function getFormattedDateAttribute()
+    {
         return $this->date->format('F j, Y');
     }
 
-    public function getFormattedStartTimeAttribute() {
+    public function getFormattedStartTimeAttribute()
+    {
         return $this->date->format('g:ia');
     }
 
@@ -33,11 +36,13 @@ class Concert extends Model
         return number_format($this->ticket_price / 100, 2);
     }
 
-    public function orders() {
+    public function orders()
+    {
         return $this->belongsToMany(Order::class, 'tickets');
     }
 
-    public function tickets() {
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
 
@@ -45,7 +50,8 @@ class Concert extends Model
     {
         $tickets = $this->tickets()->available()->take($quantity)->get();
 
-        if ($tickets->count() < $quantity) {
+        if ($tickets->count() < $quantity)
+        {
             throw new NotEnoughTicketsException;
         }
 
@@ -66,7 +72,8 @@ class Concert extends Model
 
     public function addTickets(int $quantity): Concert
     {
-        foreach (range(1, $quantity) as $i) {
+        foreach (range(1, $quantity) as $i)
+        {
             $this->tickets()->create([]);
         }
 
