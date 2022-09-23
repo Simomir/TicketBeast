@@ -35,7 +35,7 @@ class Order extends Model
         return $this->hasMany(Ticket::class);
     }
 
-    public function cancel()
+    public function cancel(): void
     {
         foreach ($this->tickets as $ticket)
         {
@@ -50,7 +50,7 @@ class Order extends Model
         return $this->tickets()->count();
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'email' => $this->email,
