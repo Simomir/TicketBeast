@@ -64,7 +64,7 @@ class Concert extends Model
         return $this->createOrder($email, $tickets);
     }
 
-    public function addTickets(int $quantity)
+    public function addTickets(int $quantity): Concert
     {
         foreach (range(1, $quantity) as $i) {
             $this->tickets()->create([]);
