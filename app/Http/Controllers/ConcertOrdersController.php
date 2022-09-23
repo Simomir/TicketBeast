@@ -37,6 +37,8 @@ class ConcertOrdersController extends Controller
 
             return response()->json([
                 'email' => $order->email,
+                'ticket_quantity' => $order->ticketQuantity(),
+                'amount' => $request->input('ticket_quantity') * $concert->ticket_price,
             ], 201);
         } catch (PaymentFailedException $e) {
             $order->cancel();
