@@ -41,6 +41,7 @@ class Order extends Model
         return [
             'email' => $this->email,
             'ticket_quantity' => $this->ticketQuantity(),
+//            'amount' => $this->amount,
             'amount' => $this->ticketQuantity() * $this->concert->ticket_price,
         ];
     }
