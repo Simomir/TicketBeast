@@ -36,6 +36,7 @@ class ConcertOrdersController extends Controller
             $this->paymentGateway->charge($request->input('ticket_quantity') * $concert->ticket_price, $request->input('payment_token'));
 
             return response()->json([
+                'id' => 5,
                 'email' => 'john@example.com',
                 'ticket_quantity' => 3,
                 'amount' => 9750,

@@ -42,7 +42,7 @@ class PurchaseTicketsTest extends TestCase
 
         $response->assertStatus(201);
 
-        $response->assertExactJson([
+        $response->assertJsonFragment([
             'email' => 'john@example.com',
             'ticket_quantity' => 3,
             'amount' => 9750,
