@@ -35,11 +35,7 @@ class ConcertOrdersController extends Controller
             $order = $concert->orderTickets($request->input('email'), $request->input('ticket_quantity'));
             $this->paymentGateway->charge($request->input('ticket_quantity') * $concert->ticket_price, $request->input('payment_token'));
 
-            return response()->json([
-                'email' => $order->email,
-                'ticket_quantity' => $order->ticketQuantity(),
-                'amount' => $request->input('ticket_quantity') * $concert->ticket_price,
-            ], 201);
+            return response()->json($order, 201);
         } catch (PaymentFailedException $e) {
             $order->cancel();
             return response()->json([], 422);
