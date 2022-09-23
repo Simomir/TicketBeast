@@ -9,7 +9,6 @@ use App\Models\Concert;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class ConcertOrdersController extends Controller
 {
@@ -19,9 +18,6 @@ class ConcertOrdersController extends Controller
         $this->paymentGateway = $paymentGateway;
     }
 
-    /**
-     * @throws ValidationException
-     */
     public function store(Request $request, $id): JsonResponse
     {
         $concert = Concert::published()->findOrFail($id);
@@ -35,9 +31,7 @@ class ConcertOrdersController extends Controller
         try {
             $tickets = $concert->findTickets($request->get('ticket_quantity'));
             $this->paymentGateway->charge($request->input('ticket_quantity') * $concert->ticket_price, $request->input('payment_token'));
-            $order = $concert->createOrder($request->get('email'), $tickets);
-
-//            $order = Order::forTickets($tickets, $request->get('email'));
+            $order = Order::forTickets($tickets, $request->get('email'));
             return response()->json($order, 201);
         } catch (PaymentFailedException $e) {
             return response()->json([], 422);
