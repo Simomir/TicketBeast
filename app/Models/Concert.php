@@ -41,7 +41,7 @@ class Concert extends Model
         return $this->hasMany(Ticket::class);
     }
 
-    public function findTickets($quantity)
+    public function findTickets(int $quantity)
     {
         $tickets = $this->tickets()->available()->take($quantity)->get();
 
@@ -52,12 +52,12 @@ class Concert extends Model
         return $tickets;
     }
 
-    public function createOrder($email, $tickets)
+    public function createOrder(string $email, $tickets)
     {
         return Order::forTickets($tickets, $email);
     }
 
-    public function orderTickets($email, $ticketQuantity): Order
+    public function orderTickets(string $email, $ticketQuantity): Order
     {
         $tickets = $this->findTickets($ticketQuantity);
 
@@ -83,7 +83,7 @@ class Concert extends Model
        return $this->orders()->where('email', $customerEmail)->count() > 0;
     }
 
-    public function ordersFor($customerEmail)
+    public function ordersFor(string $customerEmail)
     {
         return $this->orders()->where('email', $customerEmail)->get();
     }
