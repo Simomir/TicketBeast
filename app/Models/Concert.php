@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\NotEnoughTicketsException;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -90,7 +91,7 @@ class Concert extends Model
        return $this->orders()->where('email', $customerEmail)->count() > 0;
     }
 
-    public function ordersFor(string $customerEmail)
+    public function ordersFor(string $customerEmail): Collection
     {
         return $this->orders()->where('email', $customerEmail)->get();
     }
